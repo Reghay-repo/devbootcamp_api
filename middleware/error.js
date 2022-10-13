@@ -2,7 +2,7 @@ const errorResponse = require('../utils/errorResponse');
 const errorHandler = (err,req,res,next) => {
 
     // log to console dev
-    console.log(err.errors);
+    // console.log(err.errors);
     let error = { ...err };
     error.message = err.message;
 
@@ -11,7 +11,7 @@ const errorHandler = (err,req,res,next) => {
  // creating an error
 if(err.name === 'CastError') {
     const message = `Resource not found with id of ${err.value}`;
-    error = new errorResponse  (message,404);
+    error = new errorResponse (message,404);
 }
 
 // mongoose duplicate error

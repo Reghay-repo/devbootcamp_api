@@ -2,9 +2,9 @@ const express  = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
-
 const app = express();
 
 
@@ -37,7 +37,6 @@ app.use('/api/v1/bootcamps',bootcampRoutes);
 app.use(errorHandler);
 
 
-const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
     console.log(`running app in ${process.env.NODE_ENV} mode : http://localhost:${PORT}`.yellow.bold);
 })
