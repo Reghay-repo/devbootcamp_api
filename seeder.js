@@ -23,6 +23,7 @@ const importToDB = async () => {
     try {
         await Bootcamp.insertMany(bootcamps);
         console.log('Data imported succesfully!'.green.inverse);
+        process.exit();
     } catch (err) {
         console.error(err)
     }
