@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const slugify = require('slugify');
+const geoCoder = require('../utils/geocoder');
 
 const BootcampSchema = Schema({
     name:{
         type:String,
-        required:[true,'please add a name'],
+        required:[true,'Please add a name'],
         unique:true,
         trim:true,
         maxlength: [50,'Name cannot be more than 50 characters'],
@@ -13,7 +14,7 @@ const BootcampSchema = Schema({
     slug:String,
     description:{
         type:String,
-        required:[true,'please add a description'],
+        required:[true,'Please add a description'],
         maxlength:[500, 'Description cannot be more than 500 characters'],
     },
     website: {
@@ -34,7 +35,7 @@ const BootcampSchema = Schema({
           'Please add a valid email'
         ]
       },
-    adress: {
+    address: {
         type:String,
         require:[true,'Please add an adrees'],
     },
@@ -48,13 +49,14 @@ const BootcampSchema = Schema({
             type:[Number],
             index: '2dsphere'
         },
+        formattedAddress:String,
+        street:String,
+        city:String,
+        state:String,
+        zipcode:String,
+        country:String,
     },
-    formattedAdress:String,
-    streed:String,
-    city:String,
-    state:String,
-    zipcode:String,
-    country:String,
+    
     careers:{
         type:[String],
         required:true,
@@ -109,6 +111,25 @@ BootcampSchema.pre('save', function(next) {
     next();
 })
 
+// geocoder and create location 
+BootcampSchema.pre('save', async function(next) {
+    const loc = await geoCoder.geocode(this.address);
+    this.location = {
+      type: 'Point',
+      coordinates: [loc[0].longitude, loc[0].latitude],
+      formattedAddress: loc[0].formattedAddress,
+      street: loc[0].streetName,
+      city: loc[0].city,
+      state: loc[0].stateCode,
+      zipcode: loc[0].zipcode,
+      country: loc[0].countryCode
+    };
+  
+    // Do not save address in DB
+    this.address = undefined;
+    next();
+  });
+  
 
 const Bootcamp = mongoose.model('Bootcamp', BootcampSchema);
 
