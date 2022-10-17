@@ -1,12 +1,13 @@
+
+// load environement variables
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const colors = require('colors');
 const fs = require('fs');
 
 // load models
 const Bootcamp = require('./models/Bootcamp');
-
-// load environement variables
-require('dotenv').config({path:'./config/config.env'});
 
 
 
@@ -21,11 +22,12 @@ const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`
 // import to DB
 const importToDB = async () => {
     try {
-        await Bootcamp.insertMany(bootcamps);
+        await Bootcamp.create(bootcamps);
         console.log('Data imported succesfully!'.green.inverse);
         process.exit();
     } catch (err) {
         console.error(err)
+        process.exit();
     }
 }
 

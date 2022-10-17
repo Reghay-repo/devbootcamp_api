@@ -8,11 +8,12 @@ const errorHandler = require('./middleware/error');
 const app = express();
 
 
+// load dev vars
+dotenv.config();
+
 // load body parser
 app.use(express.json());
 
-// load dev vars
-dotenv.config({path:'./config/config.env'});
 
 
 // connect to db 
