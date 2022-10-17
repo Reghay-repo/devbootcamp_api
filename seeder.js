@@ -43,10 +43,23 @@ const deleteData = async () => {
     }
 }
 
+const refreshData = async () => {
+    try {
+        await Bootcamp.deleteMany({});
+        await Bootcamp.create(bootcamps);
+        console.log('Data refreshed succesfully!'.green.inverse);
+        process.exit();
+    } catch (err) {
+        console.error(err)
+        process.exit();
+    }
+}
 
 
 if(process.argv[2] === '-i') {
     importToDB();
 } else if (process.argv[2] === '-d') {
     deleteData();
+} else if (process.argv[2] === '-r') {
+    refreshData();
 }
