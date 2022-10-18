@@ -88,7 +88,7 @@ module.exports.getBootcampsInRadius = asyncHandler ( async  (req,res,next) => {
     const long =  location[0].longitude;
 
     // calculate radius using radiants
-    // divide dist by radiusof earth
+    // divide dist by radius of earth
     // Earth radius = 3,693 mi / 6,378 km
     const radius = distance / 6378;
 
