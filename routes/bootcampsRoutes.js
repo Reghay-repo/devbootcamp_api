@@ -7,6 +7,12 @@ const {getBootcamp,
         getBootcampsInRadius,
          createBootcamp } = require('../controllers/bootcampController') 
 
+// course router
+const courseRouter = require('./coursesRoutes');
+
+// re-route to course router if we hit this route
+router.use('/:bootcampId/courses', courseRouter);
+
 
 router.route('/')
     .get(getBootcamps)

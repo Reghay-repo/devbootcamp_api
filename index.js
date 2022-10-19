@@ -26,14 +26,16 @@ if (process.env.NODE_ENV === 'development') {
   
 
 // import routes
-const bootcampRoutes = require('./routes/bootcampsRoutes')
+const bootcampsRoutes   = require('./routes/bootcampsRoutes')
+const coursesRoutes     = require('./routes/coursesRoutes')
 
 
 
 
 
 //use routes
-app.use('/api/v1/bootcamps',bootcampRoutes);
+app.use('/api/v1/bootcamps',bootcampsRoutes);
+app.use('/api/v1/courses',coursesRoutes);
 
 app.use(errorHandler);
 
