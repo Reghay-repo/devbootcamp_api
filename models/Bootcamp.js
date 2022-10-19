@@ -95,10 +95,10 @@ const BootcampSchema = Schema({
         type:String,
         default:false
     },
-    createdAt:{
-        type:Date,
-        default:Date.now
-    }
+    
+    
+},{
+    timestamps: true
 });
 
 
