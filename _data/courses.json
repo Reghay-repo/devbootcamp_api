@@ -45,13 +45,13 @@
 	},
 	{
 		"_id": "5d725ce8c4ded7bcb480eaa3",
-		"title": "Web Design & Development",
-		"description": "Get started building websites and web apps with HTML/CSS/JavaScript/PHP. We teach you",
-		"weeks": 10,
-		"tuition": 9000,
-		"minimumSkill": "beginner",
-		"scholarhipsAvailable": true,
-		"bootcamp": "5d725a037b292f5f8ceff787",
+			"title": "Web Design & Development",
+			"description": "Get started building websites and web apps with HTML/CSS/JavaScript/PHP. We teach you",
+			"weeks": 10,
+			"tuition": 9000,
+			"minimumSkill": "beginner",
+			"scholarhipsAvailable": true,
+			"bootcamp": "5d725a037b292f5f8ceff787",
 		"user": "5c8a1d5b0190b214360dc031"
 	},
 	{
