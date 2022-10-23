@@ -1,7 +1,9 @@
 const express  = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const fileupload = require('express-fileupload');
 const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
@@ -14,7 +16,8 @@ dotenv.config();
 // load body parser
 app.use(express.json());
 
-
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // connect to db 
 connectDB();
@@ -29,6 +32,9 @@ if (process.env.NODE_ENV === 'development') {
 const bootcampsRoutes   = require('./routes/bootcampsRoutes')
 const coursesRoutes     = require('./routes/coursesRoutes')
 
+
+// file upload
+app.use(fileupload());
 
 
 

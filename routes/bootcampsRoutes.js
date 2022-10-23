@@ -4,6 +4,7 @@ const {getBootcamp,
         getBootcamps, 
         deleteBootcamp,
         updateBootcamp, 
+        bootcampPhotoUpload,
         getBootcampsInRadius,
          createBootcamp } = require('../controllers/bootcampController') 
 
@@ -12,6 +13,9 @@ const courseRouter = require('./coursesRoutes');
 
 // re-route to course router if we hit this route
 router.use('/:bootcampId/courses', courseRouter);
+
+router.route('/:id/photo')
+    .put(bootcampPhotoUpload);
 
 
 router.route('/')
