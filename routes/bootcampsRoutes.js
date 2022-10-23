@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const Bootcamp = require('../models/Bootcamp');
+const advancedQueryResults = require('../middleware/advancedQueryResults');
 const {getBootcamp, 
         getBootcamps, 
         deleteBootcamp,
@@ -19,7 +21,7 @@ router.route('/:id/photo')
 
 
 router.route('/')
-    .get(getBootcamps)
+    .get( advancedQueryResults(Bootcamp,'courses'),getBootcamps)
     .post(createBootcamp)
 
 router.route('/radius/:zipcode/:distance')
