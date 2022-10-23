@@ -29,8 +29,9 @@ if (process.env.NODE_ENV === 'development') {
   
 
 // import routes
-const bootcampsRoutes   = require('./routes/bootcampsRoutes')
-const coursesRoutes     = require('./routes/coursesRoutes')
+const bootcampsRoutes   = require('./routes/bootcampsRoutes');
+const coursesRoutes     = require('./routes/coursesRoutes');
+const authRoutes        = require('./routes/authRoutes');
 
 
 // file upload
@@ -42,6 +43,8 @@ app.use(fileupload());
 //use routes
 app.use('/api/v1/bootcamps',bootcampsRoutes);
 app.use('/api/v1/courses',coursesRoutes);
+app.use('/api/v1/auth',authRoutes);
+
 
 app.use(errorHandler);
 
