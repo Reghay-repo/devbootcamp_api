@@ -1,6 +1,8 @@
+// statics are called on the model and methods are called on the instance itself
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcryptjs = require('bcryptjs');
+const jwt       = require('jsonwebtoken');
 
 
 
@@ -51,6 +53,13 @@ userSchema.pre('save', async function(next) {
     this.password = await bcryptjs.hash(this.password, salt);
 });
 
+
+// sign JWT and return  
+userSchema.methods.getSignedJwtToken = function() {
+    return jwt.sign({ id: this._id, }, process.env.JWT_SECRET,{
+        expiresIn:process.env.JWT_EXPIRE
+    });
+}
 
 // create user model
 const User = mongoose.model(
