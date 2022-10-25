@@ -2,6 +2,7 @@ const express  = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
 const PORT = process.env.PORT || 5000;
@@ -15,6 +16,9 @@ dotenv.config();
 
 // load body parser
 app.use(express.json());
+
+// load cookie parser
+app.use(cookieParser());
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
