@@ -75,6 +75,60 @@ exports.loginUser = asyncHandler ( async (req,res,next) =>{
 });
 
 
+
+
+// @desc Register user 
+// route POST /api/v1/auth/register
+// access public
+exports.registerUser = asyncHandler ( async (req,res,next) =>{
+    //   get the user fields
+    const {name, email,password,role} = req.body;
+
+    //create user object 
+    const user = await User.create({
+        name,
+        email,
+        password,
+        role
+    });
+
+    // ====================old way=========
+    // // create token 
+    // const token = user.getSignedJwtToken();
+
+
+    // // return user
+    // res.status(200).json({
+    //     success:true,
+    //     token
+    // });
+
+    // =================new way=============
+    sendTokenResponse(user,200,res);
+
+});
+
+
+// @desc Get current logged in user
+// route  GET /api/v1/auth/currentuser
+// access private
+exports.getCurrentUser = asyncHandler ( async (req,res,next) => {
+
+    //get user from the req.user.id
+    const user = await User.findById(req.user.id);
+
+
+    res.status(200).json({
+        success:true,
+        data:user
+    });
+
+});
+
+
+
+
+
 // get token from model
 // create cookie and send response
 const sendTokenResponse = (user,statusCode,res) => {
