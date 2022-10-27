@@ -55,6 +55,11 @@ exports.createCourse = asyncHandler( async(req,res,next) => {
     }
     
     req.body.bootcamp = req.params.bootcampId
+    req.body.user = req.user.id;
+
+    if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`user with the ID ${req.user.id} is not authorized to add a course to this bootcamp ${bootcamp._id} `, 400))
+    }
 
     const course = await Course.create(req.body);
 
@@ -82,6 +87,10 @@ exports.deleteCourse = asyncHandler( async(req,res,next) => {
     );
   }
 
+  if(course.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(new ErrorResponse(`user with the ID ${req.user.id} is not authorized to delete  course this course ${course._id} `, 400))
+}
+
   await course.remove();
 
   res.status(200).json({
@@ -104,6 +113,9 @@ exports.updateCourse = asyncHandler( async(req,res,next) => {
 
     if(!course){ 
         return next(new ErrorResponse(`Resource not found with the id of ${req.params.id}`, 404));
+    }
+    if(course.user.toString() !== req.user.id && req.user.role !== 'admin') {
+        return next(new ErrorResponse(`user with the ID ${req.user.id} is not authorized to update  course this course ${course._id} `, 400))
     }
 
     res.status(200).json({
