@@ -30,7 +30,8 @@ const courseSchema = Schema({
     },
     bootcamp:{
         type:mongoose.Schema.ObjectId,
-        ref:'Bootcamp'
+        ref:'Bootcamp',
+        required:true
 
     },
    

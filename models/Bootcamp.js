@@ -95,6 +95,11 @@ const BootcampSchema = Schema({
         type:String,
         default:false
     },
+      user:{
+        type:mongoose.Schema.ObjectId,
+        ref:'User',
+        required:true
+    },
     
     
 },{
