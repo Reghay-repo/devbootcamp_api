@@ -19,18 +19,6 @@ exports.registerUser = asyncHandler ( async (req,res,next) =>{
         role
     });
 
-    // ====================old way=========
-    // // create token 
-    // const token = user.getSignedJwtToken();
-
-
-    // // return user
-    // res.status(200).json({
-    //     success:true,
-    //     token
-    // });
-
-    // =================new way=============
     sendTokenResponse(user,200,res);
 
 });
@@ -92,18 +80,7 @@ exports.registerUser = asyncHandler ( async (req,res,next) =>{
         role
     });
 
-    // ====================old way=========
-    // // create token 
-    // const token = user.getSignedJwtToken();
 
-
-    // // return user
-    // res.status(200).json({
-    //     success:true,
-    //     token
-    // });
-
-    // =================new way=============
     sendTokenResponse(user,200,res);
 
 });
