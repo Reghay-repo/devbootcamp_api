@@ -105,6 +105,57 @@ exports.getCurrentUser = asyncHandler ( async (req,res,next) => {
 });
 
 
+// @desc  Update user details
+// route  PUT /api/v1/auth/updatedetails
+// access private
+exports.updateUserDetails = asyncHandler ( async (req,res,next) => {
+
+
+    // update only the user name and email 
+    const fieldsToUpdate = {
+        name: req.body.name,
+        email:req.body.email
+    };
+
+    const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+        new:true,
+        runValidators:true
+    });
+
+    res.status(200).json({
+        success:true,
+        data:user
+    });
+
+});
+
+
+// @desc  Update user password
+// route  PUT /api/v1/auth/updatepassword
+// access private
+exports.updateUserPassword = asyncHandler ( async (req,res,next) => {
+
+    const {newPassword,currentPassword } = req.body;
+
+    // find user logged in by id
+    const user = await User.findById(req.user.id).select('+password');
+
+
+    // check if password is correct 
+
+    if(!(await user.matchPassword(currentPassword))) {
+        return next(new ErrorResponse('invalid password',403));
+    }
+
+
+    user.password = newPassword;
+    await user.save();
+
+    sendTokenResponse(user,200,res);
+});
+
+
+
 // @desc Forgot password
 // route  POST /api/v1/auth/forgotpassword
 // access public
