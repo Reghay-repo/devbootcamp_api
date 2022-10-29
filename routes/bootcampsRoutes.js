@@ -13,9 +13,11 @@ const {getBootcamp,
 
 // course router
 const courseRouter = require('./coursesRoutes');
+const reviewRouter = require('./reviewRoutes');
 
 // re-route to course router if we hit this route
 router.use('/:bootcampId/courses', courseRouter);
+router.use('/:bootcampId/reviews', reviewRouter);
 
 router.route('/:id/photo')
     .put(protect,authorize('publisher','admin'), bootcampPhotoUpload);
