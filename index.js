@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
 const PORT = process.env.PORT || 5000;
@@ -19,6 +20,10 @@ app.use(express.json());
 
 // load cookie parser
 app.use(cookieParser());
+
+// To remove data using these defaults:
+app.use(mongoSanitize());
+
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
