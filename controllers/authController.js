@@ -105,6 +105,26 @@ exports.getCurrentUser = asyncHandler ( async (req,res,next) => {
 });
 
 
+// @desc Log out current user /clear cookie 
+// route  GET /api/v1/auth/logout
+// access private
+exports.logout = asyncHandler ( async (req,res,next) => {
+
+    //set token value in cookie to non 
+    res.cookie('token','none', {
+        httpOnly:true,
+        expires: new Date(Date.now() + 10*1000)
+    })
+
+    res.status(200).json({
+        success:true,
+        data:{}
+    });
+
+});
+
+
+
 // @desc  Update user details
 // route  PUT /api/v1/auth/updatedetails
 // access private

@@ -1,6 +1,6 @@
 // authentication routes
 const express = require('express');
-const { registerUser, loginUser, getCurrentUser, forgotPassword, resetPassword, updateUserDetails, updateUserPassword } = require('../controllers/authController');
+const { registerUser, loginUser, getCurrentUser, forgotPassword, resetPassword, updateUserDetails, updateUserPassword, logout } = require('../controllers/authController');
 const router = express.Router();
 const { protect } = require('../middleware/auth');
 
@@ -12,6 +12,10 @@ router.route('/register')
     // login route
 router.route('/login')
     .post(loginUser);
+
+    // logout route
+router.route('/logout')
+    .get(logout);
 
     // get logged in user
 router.route('/currentuser')
