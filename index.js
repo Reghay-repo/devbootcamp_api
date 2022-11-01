@@ -10,6 +10,13 @@ const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 const app = express();
+const helmet = require("helmet");
+const xssClean = require('xss-clean');
+var cors = require('cors')
+const hpp          = require('hpp');
+const rateLimit = require('express-rate-limit')
+
+
 
 
 // load dev vars
@@ -24,6 +31,30 @@ app.use(cookieParser());
 // To remove data using these defaults:
 app.use(mongoSanitize());
 
+
+// Set security headers
+app.use(helmet());
+
+
+// prevent xxs attacks
+app.use(xssClean());
+
+
+// use cors
+app.use(cors())
+
+
+// prevent http params polution
+app.use(hpp());
+
+
+const limiter = rateLimit({
+	windowMs: 10 * 60 * 1000, // 15 minutes
+	max: 1, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+})
+
+// Apply the rate limiting middleware to all requests
+app.use(limiter)
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
