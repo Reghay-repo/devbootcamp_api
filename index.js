@@ -33,7 +33,21 @@ app.use(mongoSanitize());
 
 
 // Set security headers
-app.use(helmet());
+// app.use(helmet.contentSecurityPolicy());
+app.use(helmet.crossOriginEmbedderPolicy());
+app.use(helmet.crossOriginOpenerPolicy());
+app.use(helmet.crossOriginResourcePolicy());
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.originAgentCluster());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 
 // prevent xxs attacks
@@ -50,7 +64,7 @@ app.use(hpp());
 
 const limiter = rateLimit({
 	windowMs: 10 * 60 * 1000, // 15 minutes
-	max: 1, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 })
 
 // Apply the rate limiting middleware to all requests
