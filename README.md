@@ -5,6 +5,10 @@
 
 
 
+! [alt text] (https://github.com/Reghay-repo/devbootcamp_api/blob/main/snapshots/snap1.png)
+
+! [alt text] (https://github.com/Reghay-repo/devbootcamp_api/blob/main/snapshots/snap2.png
+
 # Getting started
 
 To get the Node server running locally:
