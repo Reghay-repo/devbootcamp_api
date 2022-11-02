@@ -4,10 +4,11 @@
 > ### Backend API (Express + Mongoose) for Bootcamps (CRUD, auth, advanced patterns, etc)
 
 
+![snap1](https://user-images.githubusercontent.com/77610660/199369711-a2da1fe2-d124-43d2-8942-6c629bd55bcb.png)
 
-![alt text] (https://github.com/Reghay-repo/devbootcamp_api/blob/main/snapshots/snap1.png)
 
-![alt text] (https://github.com/Reghay-repo/devbootcamp_api/blob/main/snapshots/snap2.png
+![snap2](https://user-images.githubusercontent.com/77610660/199369778-7b6d74ef-4ae7-462a-acc9-0a08fb685428.png)
+
 
 # Getting started
 
